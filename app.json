@@ -32,6 +32,17 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/TacticSans-Reg.ttf",
+            "./assets/fonts/TacticSans-Bld.ttf",
+            "./assets/fonts/TacticSans-Ult.ttf",
+            "./assets/fonts/Inter-Regular.ttf"
+          ]
+        }
       ]
     ],
     "experiments": {

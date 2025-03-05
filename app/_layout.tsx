@@ -1,39 +1,51 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+// _layout.tsx
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import React, { ReactNode } from "react";
+import { SafeAreaView, StatusBar, View, Text, Platform } from "react-native";
+import { useFonts } from "expo-font";
+import { Slot } from "expo-router";
+import clsx from "clsx";
+import { scale, verticalScale } from 'react-native-size-matters';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+interface AppLayoutProps {
+  children: ReactNode;
+}
+
+const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+  const [fontsLoaded] = useFonts({
+    TacticSans: require("~/assets/fonts/TacticSans-Reg.ttf"),
+    TacticSansBold: require("~/assets/fonts/TacticSans-Bld.ttf"),
+    TacticSansUlt: require("~/assets/fonts/TacticSans-Ult.ttf"),
   });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
+  if (!fontsLoaded) {
+    return (
+      <SafeAreaView
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+        <Text>Loading fonts...</Text>
+      </SafeAreaView>
+    );
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <SafeAreaView
+      className="flex-1 bg-[#06080C]"
+      // style={{ flex: 1, backgroundColor: "#06080C" }}
+    >
+      <StatusBar barStyle="dark-content" />
+      <View
+        className={clsx(
+          "flex-1 bg-[#06080C] p-[16] sm:p-[16] md:p-[36] lg:p-[42]",
+        )}
+        // style={{padding: scale(16)}}
+        // style={{ flex: 1, backgroundColor: "#06080C" }}
+      >
+        <Slot />
+      </View>
+    </SafeAreaView>
   );
-}
+};
+
+export default AppLayout;
