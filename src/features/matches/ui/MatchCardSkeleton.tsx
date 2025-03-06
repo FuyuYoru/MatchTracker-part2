@@ -1,19 +1,31 @@
-import { useTheme } from "@/app/providers/ThemeProvider";
-import clsx from "clsx";
+import React, { useEffect } from "react";
+import { View } from "react-native";
+import Animated, { Easing, useSharedValue, useAnimatedStyle, withRepeat, withTiming } from "react-native-reanimated";
+
+const PulseAnimation = () => {
+  const opacity = useSharedValue(1);
+
+  useEffect(() => {
+    opacity.value = withRepeat(
+      withTiming(0.5, { duration: 1000, easing: Easing.inOut(Easing.ease) }),
+      -1,
+      true
+    );
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
+
+  return <Animated.View className="h-14 flex-1 sm:max-w-36 bg-gray-700 rounded-md" style={animatedStyle} />;
+};
 
 export const MatchCardSkeleton: React.FC = () => {
-  const { theme } = useTheme();
-
   return (
-    <div
-      className={clsx(
-        "flex flex-row justify-between items-center p-4 rounded-[4px] w-full h-[90px]",
-        theme === "dark" ? "bg-[#0F1318]" : "bg-[#E5E7EB]"
-      )}
-    >
-      <div className="h-14 w-36 animate-pulse bg-gray-700 rounded-md"></div>
-      <div className="h-14 w-24 animate-pulse bg-gray-700 rounded-md"></div>
-      <div className="h-14 w-36 animate-pulse bg-gray-700 rounded-md"></div>
-    </div>
+    <View className="flex-row justify-between items-center gap-[10] mb-[12] sm:gap-0 p-4 rounded-[4] w-full h-[90] bg-[#0F1318]">
+      <PulseAnimation />
+      <PulseAnimation />
+      <PulseAnimation />
+    </View>
   );
 };

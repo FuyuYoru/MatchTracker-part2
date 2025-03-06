@@ -17,16 +17,16 @@ export const useMatchStore = create<MatchStore>((set, get) => ({
 
     fetchMatches: async () => {
         set({ isLoading: true, fetchError: false });
-
+    
         try {
-            const res = await fetchMatches();
-            // if (!res.ok) throw new Error("Ошибка при загрузке матчей");
-            // const data = await res.json();
-            const data = res;
-            set({ matches: data, isLoading: false });
-            console.log(get().matches)
+            setTimeout(async () => {
+                const res = await fetchMatches();
+                const data = res;
+                set({ matches: data, isLoading: false });
+                console.log(get().matches);
+            }, 1500);
         } catch {
             set({ fetchError: true, isLoading: false });
         }
-    },
+    },    
 }));

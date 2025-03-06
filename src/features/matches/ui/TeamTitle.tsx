@@ -15,12 +15,12 @@ export const TeamTitle: React.FC<TeamTitleProps> = ({
   return (
     <View
       className={clsx(
-        "bg-transparent flex flex-row items-center gap-[14] p-4",
+        "bg-transparent flex flex-row items-center gap-[6]",
         classNames
       )}
     >
       {/* <Icon className="w-6 h-6 mr-2" /> */}
-      <Image src="/teamIcon.png" />
+      <Image className="w-[28] h-[28]" source={require("~/assets/images/teamIcon.png")} />
       <Text className="text-white font-[600]" style={{fontFamily: 'Inter', fontSize: 16}}>{name}</Text>
     </View>
   );
