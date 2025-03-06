@@ -3,7 +3,7 @@ import { Player } from "~/src/features/matches/model";
 
 export const PlayerStatistics: React.FC<{ player: Player }> = ({ player }) => {
     return (
-        <View className="flex flex-col sm:justify-between w-full sm:flex-row py-[7px] px-[12px] items-center bg-[#101318] rounded-[4px] flex-1">
+        <View className="flex flex-col sm:justify-between w-full lg:flex-row py-[7px] px-[12px] items-center bg-[#101318] rounded-[4px] flex-1">
             <View className="flex-row items-center sm:justify-between gap-[8px] max-sm:w-full">
                 <Image 
                     source={require("~/assets/images/image.png")} 
@@ -26,7 +26,7 @@ export const PlayerStatistics: React.FC<{ player: Player }> = ({ player }) => {
                 </View>
             </View>
 
-            <View className="flex-row items-center gap-[8px">
+            <View className="flex-row items-center gap-[8]">
                 <Text className="text-[#FAFAFA66]" style={{ fontFamily: "Inter", fontSize: 12 }}>
                     Убийств:
                 </Text>

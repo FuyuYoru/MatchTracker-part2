@@ -10,7 +10,6 @@ export const useWebSocket = (url: string) => {
     ws.onopen = () => console.log("WebSocket подключен");
 
     ws.onmessage = (event) => {
-      console.log("Получено сообщение:", event.data);
       setMessages((prev) => [...prev, event.data]);
     };
 
@@ -21,7 +20,7 @@ export const useWebSocket = (url: string) => {
     setSocket(ws);
 
     return () => {
-      ws.close(); // Закрываем соединение при размонтировании
+      ws.close();
     };
   }, [url]);
 

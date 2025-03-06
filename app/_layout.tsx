@@ -5,8 +5,7 @@ import { SafeAreaView, StatusBar, View, Text, Platform } from "react-native";
 import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import clsx from "clsx";
-import { scale, verticalScale } from 'react-native-size-matters';
-
+import { ClickOutsideProvider } from "react-native-click-outside";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -30,21 +29,21 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   }
 
   return (
-    <SafeAreaView
-      className="flex-1 bg-[#06080C]"
-      // style={{ flex: 1, backgroundColor: "#06080C" }}
-    >
-      <StatusBar barStyle="dark-content" />
-      <View
-        className={clsx(
-          "flex-1 bg-[#06080C] p-[16] sm:p-[16] md:p-[36] lg:p-[42]",
-        )}
-        // style={{padding: scale(16)}}
-        // style={{ flex: 1, backgroundColor: "#06080C" }}
+    <ClickOutsideProvider>
+      <SafeAreaView
+        className="flex-1 bg-[#06080C]"
       >
-        <Slot />
-      </View>
-    </SafeAreaView>
+        <StatusBar barStyle="dark-content" />
+        <View
+          className={clsx(
+            "flex-1 bg-[#06080C] p-[16] sm:p-[16] md:p-[36] lg:p-[42]"
+          )}
+
+        >
+          <Slot />
+        </View>
+      </SafeAreaView>
+    </ClickOutsideProvider>
   );
 };
 
