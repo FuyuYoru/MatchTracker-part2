@@ -88,7 +88,7 @@ export const MatchFilter: React.FC<IMatchFilter> = ({ onChange }) => {
           })}
         </View>
       )}
-      classNames="h-full w-full sm:w-[170]"
+      classNames="w-full sm:w-[170]"
       offsetY={65}
       onChangeState={animateIcon}
     />

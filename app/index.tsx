@@ -20,7 +20,6 @@ const App: React.FC = () => {
     if (messages.length > 0) {
       try {
         const newMatches = JSON.parse(messages[messages.length - 1])
-        console.log(newMatches);
         setMatches(newMatches.data);
         setIsLoading(false);
       } catch (error) {

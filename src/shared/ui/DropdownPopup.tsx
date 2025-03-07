@@ -40,7 +40,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 
   return (
     <View className={clsx("relative z-[1000]", classNames)} ref={ref}>
-      <Pressable onPress={toggleMenu} className="h-full w-full">
+      <Pressable onPress={toggleMenu} className="w-full">
         {trigger}
       </Pressable>
       {isOpen && (
